@@ -39,12 +39,16 @@ public class IndexersTest
     Animals collection = new();
 
     // Act 
-    collection[0] = "dog";
-    collection[1] = "cat";
+    Action firstAction = () =>
+    {
+      collection[0] = "dog";
+      collection[1] = "cat";
+    };
 
-    void act() => collection[0] = "zebra";
+    Action secondAction = () => collection[0] = "zebra";
 
     // Assert 
-    // act.Should().Throw<StrictMockException>();
+    // firstAction.Should().NotThrow();
+    // secondAction.Should().Throw<StrictMockException>();
   }
 }
