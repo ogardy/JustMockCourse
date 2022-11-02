@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Telerik.JustMock.Core;
 
 namespace JustMockCourse.BasicScenarios.PublicProperties;
 
@@ -42,12 +43,11 @@ public class PropertiesTest
     IEntity entity = null;
 
     // Act 
-    entity.Id = 4;
-    entity.Id = 5;
-
-    void act() => entity.Id = 15;
+    Action firstAction = () => entity.Id = 5;
+    Action secondAction = () => entity.Id = 15;
 
     // Assert 
-    // act.Should().Throw<StrictMockException>();
+    // firstAction.Should().NotThrow();
+    // secondAction.Should().Throw<StrictMockException>();
   }
 }
