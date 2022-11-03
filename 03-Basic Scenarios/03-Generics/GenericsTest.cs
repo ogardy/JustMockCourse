@@ -47,7 +47,7 @@ public class GenericsTest
     int expectedWithInts = 10;
 
     // Act 
-    int actual = calculator.Add(2, 3);
+    int actual = calculator.Add(4, 6);
 
     // Assert 
     actual.Should().Be(expectedWithInts);
