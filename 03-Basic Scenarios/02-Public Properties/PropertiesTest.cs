@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Telerik.JustMock.Core;
 
 namespace JustMockCourse.BasicScenarios.PublicProperties;
 
@@ -8,7 +7,7 @@ public interface IEntity
   int Id { get; set; }
 }
 
-public class PropertiesTest
+public class GenericsTest
 {
   [Fact]
   public void ShouldFakePropertyGet()
