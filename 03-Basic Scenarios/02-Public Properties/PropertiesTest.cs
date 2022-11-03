@@ -7,7 +7,7 @@ public interface IEntity
   int Id { get; set; }
 }
 
-public class GenericsTest
+public class PropertiesTest
 {
   [Fact]
   public void ShouldFakePropertyGet()
