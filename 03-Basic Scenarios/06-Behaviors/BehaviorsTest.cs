@@ -35,7 +35,7 @@ public class Position
 public class BehaviorsTest
 {
   [Fact]
-  public async Task ShouldTestRecursiveLooseBehavior()
+  public void ShouldTestRecursiveLooseBehavior()
   {
     // Arrange 
     Player player = null;
@@ -47,23 +47,24 @@ public class BehaviorsTest
     player.Name.Should().Be(default);
     player.ScreamName().Should().Be(default);
     player.Position.Should().NotBeNull();
+    player.Position.Should().BeOfType<Position>();  
     actual.Should().Be(default);
   }
 
   [Fact]
-  public async Task ShouldTestLooseBehavior()
+  public void ShouldTestLooseBehavior()
   {
     // Arrange 
     Player player = null;
 
     // Assert
     player.Name.Should().Be(default);
-    player.Position.Should().BeNull();
     player.ScreamName().Should().Be(default);
+    player.Position.Should().BeNull();
   }
 
   [Fact]
-  public async Task ShouldTestCallOriginalBehavior()
+  public void ShouldTestCallOriginalBehavior()
   {
     // Arrange 
     Player player = null;
@@ -75,23 +76,26 @@ public class BehaviorsTest
     player.Name.Should().Be("William Adama");
     player.ScreamName().Should().Be("WILLIAM ADAMA");
     player.Position.Should().NotBeNull();
+    player.Position.Should().BeOfType<Position>();
     actual.Should().Be(10);
   }
 
   [Fact]
-  public async Task ShouldTestStrictBehavior()
+  public void ShouldTestStrictBehavior()
   {
     // Arrange 
     Player player = null;
 
+    string expected = "GAIUS BALTAR";
+
     // Act 
     Func<string> getName = () => player.Name;
-    Func<string> screamName = () => player.ScreamName();
     Func<Position> getPosition = () => player.Position;
+    string actual = player.ScreamName();
 
     // Assert
     // getName.Should().Throw<StrictMockException>();
-    // screamName.Should().Throw<StrictMockException>();
     // getPosition.Should().Throw<StrictMockException>();
+    actual.Should().Be(expected);
   }
 }
