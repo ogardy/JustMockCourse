@@ -5,8 +5,9 @@ namespace JustMockCourse.BasicScenarios.Behaviors;
 
 public class Player
 {
-  public string Name { get; } = "William Adama";
-  public Position Position { get; } = new Position(10, 10);
+  public string Name { get; }
+  public int Health { get; } = 100;
+  public Position Position { get; }
 
   public Player(string name, Position position)
   {
@@ -44,9 +45,9 @@ public class BehaviorsTest
     float actual = player.Position.GetDistanceTo(new Position(0, 10));
 
     // Assert
-    player.Name.Should().Be(default);
-    player.ScreamName().Should().Be(default);
-    player.Position.Should().NotBeNull();
+    player.Name.Should().BeEmpty();
+    player.ScreamName().Should().BeEmpty();
+    player.Health.Should().Be(default);
     player.Position.Should().BeOfType<Position>();  
     actual.Should().Be(default);
   }
@@ -60,22 +61,24 @@ public class BehaviorsTest
     // Assert
     player.Name.Should().Be(default);
     player.ScreamName().Should().Be(default);
-    player.Position.Should().BeNull();
+    player.Health.Should().Be(default);
+    player.Position.Should().Be(default);
   }
 
   [Fact]
   public void ShouldTestCallOriginalBehavior()
   {
     // Arrange 
+    string name = "William Adama";
     Player player = null;
 
     // Act 
     float actual = player.Position.GetDistanceTo(new Position(0, 10));
 
     // Assert
-    player.Name.Should().Be("William Adama");
+    player.Name.Should().Be(name);
     player.ScreamName().Should().Be("WILLIAM ADAMA");
-    player.Position.Should().NotBeNull();
+    player.Health.Should().Be(100);
     player.Position.Should().BeOfType<Position>();
     actual.Should().Be(10);
   }
@@ -90,11 +93,13 @@ public class BehaviorsTest
 
     // Act 
     Func<string> getName = () => player.Name;
+    Func<int> getHealth = () => player.Health;
     Func<Position> getPosition = () => player.Position;
     string actual = player.ScreamName();
 
     // Assert
     // getName.Should().Throw<StrictMockException>();
+    // getHealth.Should().Throw<StrictMockException>();
     // getPosition.Should().Throw<StrictMockException>();
     actual.Should().Be(expected);
   }
