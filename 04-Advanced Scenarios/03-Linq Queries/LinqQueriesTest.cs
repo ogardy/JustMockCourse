@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using System.Collections;
+using Telerik.JustMock;
 
 namespace JustMockCourse.AdvancedScenarios.LinqQueries;
 
@@ -113,7 +114,7 @@ public class LinqQueriesTest
   {
     // ARRANGE 
     var simpleData = new SuperSimpleData();
-    
+    Mock.Arrange(() => simpleData.Products).Returns(GetProducts());
 
     // ACT 
     var actual = simpleData.Products
@@ -131,7 +132,7 @@ public class LinqQueriesTest
   {
     // ARRANGE 
     var simpleData = new SimpleData();
-    
+    Mock.Arrange(() => simpleData.Products).ReturnsCollection(GetProducts());
 
     // ACT 
     var actual = simpleData.Products
@@ -148,7 +149,8 @@ public class LinqQueriesTest
   {
     // ARRANGE
     var simpleData = new SimpleData();
-    
+    Mock.Arrange(() => simpleData.Products).ReturnsCollection(GetProducts());
+    Mock.Arrange(() => simpleData.Categories).ReturnsCollection(GetCategories());
 
     // ACT 
     var actual = simpleData.Products
@@ -165,6 +167,14 @@ public class LinqQueriesTest
     var simpleData = new SimpleData();
     int targetProductId = 2;
     int expectedId = 10;
+
+    Mock.Arrange(() => simpleData.Products).ReturnsCollection(GetProducts());
+    Mock.Arrange(() => simpleData.Products
+      .Where(x => x.ProductID == targetProductId)
+      .First()
+      .GetId())
+      .Returns(expectedId)
+      .MustBeCalled();
 
 
     // ACT
