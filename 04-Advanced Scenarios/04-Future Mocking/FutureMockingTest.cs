@@ -1,4 +1,6 @@
 ﻿using FluentAssertions;
+using Telerik.JustMock;
+using Telerik.JustMock.Helpers;
 
 namespace JustMockCourse.AdvancedScenarios.FutureMocking;
 
@@ -14,7 +16,9 @@ public class FutureMockingTest
   public void ShouldArrangeReturnOnlyForSpecificInstance()
   {
     // ARRANGE 
-    UserData userData = null;
+    UserData userData = Mock.Create<UserData>();
+
+    userData.Arrange(u => u.Age).Returns(25);
 
     // ASSERT
     userData.Age.Should().Be(25);
@@ -25,7 +29,9 @@ public class FutureMockingTest
   public void ShouldArrangeReturnForFutureUserDataInstances()
   {
     // ARRANGE 
-    UserData userData = null;
+    UserData userData = Mock.Create<UserData>();
+
+    userData.Arrange(u => u.Age).IgnoreInstance().Returns(21);
 
     // ASSERT
     userData.Age.Should().Be(21);
@@ -39,8 +45,10 @@ public class FutureMockingTest
   public void ShouldReturnFakeCollectionForFutureCall()
   {
     // ARRANGE 
-    UserData userData = null;
+    UserData userData = Mock.Create<UserData>();
     var expectedFriends = FakeFriends;
+
+    userData.Arrange(u => u.Friends).IgnoreInstance().ReturnsCollection(expectedFriends);
 
     // ACT
     var actualArrangedCollection = userData.Friends;
