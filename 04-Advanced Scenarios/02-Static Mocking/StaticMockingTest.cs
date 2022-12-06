@@ -16,7 +16,7 @@ public static class CalculatorExtension
 public class StaticMockingTest
 {
   [Fact]
-  public void ShouldShouldMockStaticCall()
+  public void ShouldMockStaticCall()
   {
     // ARRANGE
 
@@ -28,7 +28,7 @@ public class StaticMockingTest
   }
 
   [Fact]
-  public void ShouldArrangeReturnOnlyForSpecificInstance()
+  public void ShouldMockExtensionMethod()
   {
     // ARRANGE 
     Calculator calc = new();
