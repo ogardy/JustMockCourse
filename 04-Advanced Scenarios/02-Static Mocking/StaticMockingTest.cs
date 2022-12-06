@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Telerik.JustMock;
 
 namespace JustMockCourse.AdvancedScenarios.StaticMocking;
 
@@ -16,9 +17,10 @@ public static class CalculatorExtension
 public class StaticMockingTest
 {
   [Fact]
-  public void ShouldShouldMockStaticCall()
+  public void ShouldMockStaticCall()
   {
     // ARRANGE
+    Mock.Arrange(() => Calculator.Add(Arg.AnyInt, Arg.AnyInt)).Returns(10);
 
     // ACT
     int actual = Calculator.Add(1, 2);
@@ -28,10 +30,12 @@ public class StaticMockingTest
   }
 
   [Fact]
-  public void ShouldArrangeReturnOnlyForSpecificInstance()
+  public void ShouldMockExtensionMethod()
   {
     // ARRANGE 
     Calculator calc = new();
+
+    Mock.Arrange(() => calc.Multiply(Arg.AnyInt, Arg.AnyInt)).Returns(20);
 
     // ACT
     int actual = calc.Multiply(2, 2);
