@@ -7,7 +7,7 @@ namespace JustMockCourse.AdvancedScenarios.FutureMocking;
 public class UserData
 {
   public int Age { get; set; }
-  public List<string> Friends { get; set; }
+  public List<string>? Friends { get; set; }
 }
 
 public class FutureMockingTest
