@@ -23,9 +23,4 @@ jobs:
           TELERIK_USERNAME: ${{ secrets.TELERIK_USERNAME }}
           TELERIK_PASSWORD: ${{ secrets.TELERIK_PASSWORD }}
       - name: Test
-        run: dotnet test -s test.runsettings --no-restore --verbosity normal
-        env:
-          JUSTMOCK_INSTANCE: 1
-          CORECLR_ENABLE_PROFILING: 1
-          CORECLR_PROFILER: '{B7ABE522-A68F-44F2-925B-81E7488E9EC0}'
-          CORECLR_PROFILER_PATH: /home/runner/.nuget/packages/justmock.commercial/2022.3.1109.1/runtimes/linux-x64/native/libTelerik.CodeWeaver.Profiler.so
+        run: dotnet test -s github.runsettings --no-restore --verbosity normal
